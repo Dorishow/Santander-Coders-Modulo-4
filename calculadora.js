@@ -45,7 +45,9 @@ const calculadora = (() =>{
         }
         else{
             nextEnterWillBe('n1')
-            return alert('A ordem de entrada deve ser => Número 1 => Operador => Número 2')
+            alert('A ordem de entrada deve ser => Número 1 => Operador => Número 2')
+            calc = {n1: 0, operator: '', n2: 0}
+            return "Entrada realizada na ordem errada"
         }
     }
 
@@ -60,6 +62,7 @@ const calculadora = (() =>{
         if(operator === '-') return n1 - n2
         if(operator === '*') return n1 * n2
         if(operator === '/') return n1 / n2
+        if(operator === '^') return Math.pow(n1, n2)
         else return 'operator inválido'
     }
     

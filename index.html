@@ -17,41 +17,63 @@
             <label><input type="radio" onchange="handleCheckbox(event)" value="-" name="operacao" id="subtrair">Subtrair</label>
             <label><input type="radio" onchange="handleCheckbox(event)" value="*" name="operacao" id="multiplicar">Multiplicar</label>
             <label><input type="radio" onchange="handleCheckbox(event)" value="/" name="operacao" id="dividir">Dividir</label>
+            <label><input type="radio" onchange="handleCheckbox(event)" value="^" name="operacao" id="exponenciar">Exponenciar</label>
+
         </div>
+        
         <button onclick="equal()">=</button>
+        
 
         <section>
-            calculo<span id="calculo">: </span>
+            calculo: <span id="calculo"></span>
         </section>
 
     </main>
     <script src="calculadora.js"></script>
     <script>
         const input = document.querySelector('input')
+        const radios = document.querySelectorAll('operacao')
         const calculo = document.querySelector('#calculo')
 
         function clearInput(){
             input.value = ''
         }
 
-        function ShowCalc(value){
+        function clearCalc(){
+            calculo.textContent = ''
+        }
+
+        function ShowInCalc(value){
             calculo.textContent += ` ${value} `
+        }
+
+        function endCalc(){
+            calculo.textContent += ` | `
         }
 
         function entrar(){
             calculadora.enter(parseInt(input.value))
-            ShowCalc(input.value)
+            ShowInCalc(input.value)
             clearInput()
         }
 
         function handleCheckbox(event){
             calculadora.enter(event.target.value)
-            ShowCalc(event.target.value)
+            ShowInCalc(event.target.value)
+        }
+
+        function uncheckRadios(){
+            radios.values = false
         }
 
         function equal(){
             const resultado = calculadora.equals()
-            resultado? calculo.textContent += ` = ${resultado} | >`: null
+            if(resultado){
+                ShowInCalc(" = ")
+                ShowInCalc(resultado)
+                endCalc()
+                uncheckRadios()
+            }
         }
     </script>
 </body>
