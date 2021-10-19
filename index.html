@@ -13,12 +13,11 @@
         <input type="number" name="number">
         <button onclick="entrar()">Adicionar ao cálculo</button>
         <div>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="+" name="operacao" id="somar">Somar</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="-" name="operacao" id="subtrair">Subtrair</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="*" name="operacao" id="multiplicar">Multiplicar</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="/" name="operacao" id="dividir">Dividir</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="^" name="operacao" id="exponenciar">Exponenciar</label>
-
+            <label><input type="radio" onchange="handleCheckbox(event)" value="+" name="operacao" id="operacao">Somar</label>
+            <label><input type="radio" onchange="handleCheckbox(event)" value="-" name="operacao" id="operacao">Subtrair</label>
+            <label><input type="radio" onchange="handleCheckbox(event)" value="*" name="operacao" id="operacao">Multiplicar</label>
+            <label><input type="radio" onchange="handleCheckbox(event)" value="/" name="operacao" id="operacao">Dividir</label>
+            <label><input type="radio" onchange="handleCheckbox(event)" value="^" name="operacao" id="operacao">Exponenciar</label>
         </div>
         
         <button onclick="equal()">=</button>
@@ -30,52 +29,7 @@
 
     </main>
     <script src="calculadora.js"></script>
-    <script>
-        const input = document.querySelector('input')
-        const radios = document.querySelectorAll('operacao')
-        const calculo = document.querySelector('#calculo')
-
-        function clearInput(){
-            input.value = ''
-        }
-
-        function clearCalc(){
-            calculo.textContent = ''
-        }
-
-        function ShowInCalc(value){
-            calculo.textContent += ` ${value} `
-        }
-
-        function endCalc(){
-            calculo.textContent += ` | `
-        }
-
-        function entrar(){
-            calculadora.enter(parseInt(input.value))
-            ShowInCalc(input.value)
-            clearInput()
-        }
-
-        function handleCheckbox(event){
-            calculadora.enter(event.target.value)
-            ShowInCalc(event.target.value)
-        }
-
-        function uncheckRadios(){
-            radios.values = false
-        }
-
-        function equal(){
-            const resultado = calculadora.equals()
-            if(resultado){
-                ShowInCalc(" = ")
-                ShowInCalc(resultado)
-                endCalc()
-                uncheckRadios()
-            }
-        }
-    </script>
+    <script src="interacoes.js"></script>
 </body>
 
 </html>
