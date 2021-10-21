@@ -31,7 +31,18 @@ lista.forEach(
     )
 }
 
-function addUser(e) {
+function removeUser(id){
+
+    const newList = [...users].filter(item => item.id !== +id )
+    console.log(newList)
+
+    users = newList
+
+    updateScreen(event)
+
+}
+
+function updateScreen(e) {
     e.preventDefault()
 
     if (inputText.value) {
@@ -46,17 +57,13 @@ function addUser(e) {
     clearInput()
 
     const allButtons = document.querySelectorAll('.remove')
-
-    console.log(users)
     
     allButtons.forEach(
-        currentButton => currentButton.addEventListener('click', function alertar(e){
-            console.log(e.target.id)
-        })
+        currentButton => currentButton.addEventListener('click', (e) => removeUser(e.target.id))
     )
 
 }
 
-addButton.addEventListener('click', (e) => addUser(e))
+addButton.addEventListener('click', (e) => updateScreen(e))
 
 
