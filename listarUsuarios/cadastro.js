@@ -6,44 +6,52 @@ const list = document.querySelector('#list')
 
 let users = []
 
-const clearList = () => list.innerHTML = '';
-
 let idGenerator = 0;
 
-const iterateUsersList = (value, id) => [...users, { name: value, id: id }]
+const clearList = () => list.innerHTML = '';
 
-function addUser(e) {
-    e.preventDefault()
+const clearInput = () => inputText.value = '';
 
-    if (inputText.value) {
-        users = iterateUsersList(inputText.value,idGenerator)
-        idGenerator = idGenerator + 1
-    }
+const addToList = (value, id) => [...users, { name: value, id: id }]
 
-    clearList()
-
-    users.forEach(
+function updateList(lista){
+lista.forEach(
         user => {
             const itemList = document.createElement('li');
             const removeButton = document.createElement('button')
-
             removeButton.appendChild(document.createTextNode('remove'))
             removeButton.setAttribute('id', user.id)
             removeButton.setAttribute('class', 'remove')
+
             itemList.appendChild(document.createTextNode(user.name));
 
             itemList.appendChild(removeButton)
             list.appendChild(itemList)
         }
     )
+}
 
-    inputText.value = ''
+function addUser(e) {
+    e.preventDefault()
+
+    if (inputText.value) {
+        users = addToList(inputText.value, idGenerator)
+        idGenerator = idGenerator + 1
+    }
+
+    clearList()
+
+    updateList(users)
+
+    clearInput()
 
     const allButtons = document.querySelectorAll('.remove')
+
+    console.log(users)
     
     allButtons.forEach(
-        currentButton => currentButton.addEventListener('click', function alertar(){
-            alert(currentButton.id)
+        currentButton => currentButton.addEventListener('click', function alertar(e){
+            console.log(e.target.id)
         })
     )
 
