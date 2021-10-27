@@ -71,29 +71,3 @@ const calculadora = (() =>{
     }
 
 })()
-
-    // calculadora.enter(5)
-    // calculadora.enter('+')
-    // calculadora.enter(1)
-    // calculadora.equals()
-
-    // calculadora.enter(2)
-    // calculadora.enter('-')
-    // calculadora.enter(1)
-    // calculadora.equals()
-
-    // calculadora.enter(5)
-    // calculadora.enter('*')
-    // calculadora.enter(2)
-    // calculadora.equals()
-
-    // calculadora.enter(5)
-    // calculadora.enter('/')
-    // calculadora.enter(2)
-    // calculadora.equals()
-
-    // calculadora.list()
-
-    // calculadora.reset()
-    
-    // calculadora.list()
