@@ -10,25 +10,36 @@
 
 <body>
     <main>
-        <input type="number" name="number">
-        <button onclick="entrar()">Adicionar ao cálculo</button>
+        <form onsubmit="entrar(event)">
+            <input type="number" name="number">
+            <button>Adicionar ao cálculo</button>
+        </form>
         <div>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="+" name="operacao" id="operacao">Somar</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="-" name="operacao" id="operacao">Subtrair</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="*" name="operacao" id="operacao">Multiplicar</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="/" name="operacao" id="operacao">Dividir</label>
-            <label><input type="radio" onchange="handleCheckbox(event)" value="^" name="operacao" id="operacao">Exponenciar</label>
+            <label><input type="radio" onchange="handleRadioButtons(event)" value="+" name="operacao"
+                    id="operacao">Somar</label>
+            <label><input type="radio" onchange="handleRadioButtons(event)" value="-" name="operacao"
+                    id="operacao">Subtrair</label>
+            <label><input type="radio" onchange="handleRadioButtons(event)" value="*" name="operacao"
+                    id="operacao">Multiplicar</label>
+            <label><input type="radio" onchange="handleRadioButtons(event)" value="/" name="operacao"
+                    id="operacao">Dividir</label>
+            <label><input type="radio" onchange="handleRadioButtons(event)" value="^" name="operacao"
+                    id="operacao">Exponenciar</label>
         </div>
-        
+
         <button onclick="equal()">=</button>
-        
+
 
         <section>
-            calculo: <span id="calculo"></span>
+            calculo: <ul id="calculo"></ul>
         </section>
 
+        <button onclick="showHistory()">Mostrar histórico da calculadora</button>
+        <button onclick="clearHistory()">Limpar histórico da calculadora</button>
+
+
     </main>
-    <script src="calculadora.js"></script>
+    <script src="calculadora2.js"></script>
     <script src="interacoes.js"></script>
 </body>
 

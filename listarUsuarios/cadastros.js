@@ -13,13 +13,13 @@ const addRemoveButtonToNode = node => {
     node.append(button)
 }
 
-function addToList(e, inputNode, list, form){
+function addUserToList(e, liText, list, form){
     e.preventDefault()
     const li = document.createElement('li')
-    li.textContent = inputNode.value
+    li.textContent = liText
     addRemoveButtonToNode(li)
     list.append(li)
     clearForm(form)
 }
 
-form.addEventListener('submit', e => addToList(e, inputNode, list, form))
+form.addEventListener('submit', e => addUserToList(e, inputNode.value, list, form))

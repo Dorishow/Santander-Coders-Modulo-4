@@ -10,7 +10,12 @@ const calculadora = (() => {
 
     const addToHistory = (data) => history = [...history, data]
 
-    const list = () => {console.table(history)}
+    function list() {
+        if(history[0]) return history
+        else{
+            return ['Não há nada no histórico da calculadora']
+        }
+    }  
 
     const reset = () => {history = []}
     
@@ -40,8 +45,9 @@ const calculadora = (() => {
             const result = getResultOf(calc)
             addToHistory(result)
             resetCalc()
+            return result
         } else{
-            console.log('Please type number 1, operator and number 2 before request the resolution')
+            return 'Please type number 1, operator and number 2 before request the resolution'
         }
     }
 
@@ -57,38 +63,38 @@ const calculadora = (() => {
     return {enter, equals, list, reset}
 })()
 
-calculadora.enter(5)
-calculadora.enter('+')
-calculadora.enter(1)
-calculadora.equals()
+// calculadora.enter(5)
+// calculadora.enter('+')
+// calculadora.enter(1)
+// calculadora.equals()
 
-calculadora.enter(2)
-calculadora.enter('-')
-calculadora.enter(1)
-calculadora.equals()
+// calculadora.enter(2)
+// calculadora.enter('-')
+// calculadora.enter(1)
+// calculadora.equals()
 
-calculadora.enter(2)
-calculadora.enter('^')
-calculadora.enter(3)
-calculadora.equals()
+// calculadora.enter(2)
+// calculadora.enter('^')
+// calculadora.enter(3)
+// calculadora.equals()
 
-calculadora.enter(3)
-calculadora.enter('^')
-calculadora.enter(2)
-calculadora.equals()
+// calculadora.enter(3)
+// calculadora.enter('^')
+// calculadora.enter(2)
+// calculadora.equals()
 
-calculadora.enter(5)
-calculadora.enter('*')
-calculadora.enter(2)
-calculadora.equals()
+// calculadora.enter(5)
+// calculadora.enter('*')
+// calculadora.enter(2)
+// calculadora.equals()
 
-calculadora.enter(5)
-calculadora.enter('/')
-calculadora.enter(2)
-calculadora.equals()
+// calculadora.enter(5)
+// calculadora.enter('/')
+// calculadora.enter(2)
+// calculadora.equals()
 
-calculadora.list()
+// calculadora.list()
 
-calculadora.reset()
+// calculadora.reset()
 
-calculadora.list()
+// calculadora.list()

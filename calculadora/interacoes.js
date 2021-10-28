@@ -11,20 +11,35 @@ function clearCalc() {
 }
 
 function ShowInCalc(value) {
-    calculo.textContent += ` ${value} `
+    calculo.innerHTML = ''
+    const li = document.createElement('li')
+    li.textContent = value
+    calculo.append(li)
 }
 
-function endCalc() {
-    calculo.textContent += ` | `
+function showHistory() {
+    calculo.innerHTML = ''
+    const history = calculadora.list()
+    for(calcs of history){
+        const li = document.createElement('li')
+        li.textContent = calcs
+        calculo.append(li)
+    }
 }
 
-function entrar() {
+function clearHistory(){
+    calculo.innerHTML = ''
+    calculadora.reset()
+}
+
+function entrar(e) {
+    e.preventDefault()
     calculadora.enter(parseInt(input.value))
     ShowInCalc(input.value)
     clearInput()
 }
 
-function handleCheckbox(event) {
+function handleRadioButtons(event) {
     calculadora.enter(event.target.value)
     ShowInCalc(event.target.value)
 }
@@ -36,9 +51,7 @@ function uncheckRadios() {
 function equal() {
     const resultado = calculadora.equals()
     if (resultado) {
-        ShowInCalc(" = ")
         ShowInCalc(resultado)
-        endCalc()
         uncheckRadios()
     }
 }
