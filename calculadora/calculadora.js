@@ -1,73 +1,101 @@
-const calculadora = (() =>{
-    
-    let calc = {n1: 0, operator: '', n2: 0}
-    let EnterController = 'n1'
+const calculadora = (() => {
+    let calc = {n1: false, operator: false, n2: false}
     let history = []
 
-    const isNumber = (n) => typeof n == 'number'
-    const isString = (n) => typeof n == 'string'
+    const resetCalc = () => calc = {n1: false, operator: false, n2: false}
 
-    const isFirstNumber = (EnterController) => EnterController === 'n1'
-    const isOperator = (EnterController) => EnterController === 'operator'
-    const isSecondNumber = (EnterController) => EnterController === 'n2'
+    const isNumber = data => typeof data == 'number'
 
-    const setToCalculator = (prop, data) => calc = {...calc, [prop]: data}
-    const nextEnterWillBe = (value) => EnterController = value
+    const isString = data => typeof data == 'string'
 
-    function enter(data){
+    const addToHistory = (data) => history = [...history, data]
+
+    const getCalc = () => calc
+
+    function list() {
+        if(history[0]) return history
+        else{
+            return ['Não há nada no histórico da calculadora']
+        }
+    }  
+
+    const reset = () => {history = []}
+    
+
+    const enter = data =>{
         if(isNumber(data)){
-            if(isFirstNumber(EnterController)){
-                setToCalculator('n1', data)
-                nextEnterWillBe('operator')
-            }
-            else if(isSecondNumber(EnterController)){
-                setToCalculator('n2', data)
-            }
-            else{
-                setToCalculator('n1', data)
-                nextEnterWillBe('operator')
-            }
+            if(!calc.operator) return calc.n1 = data
+            if(calc.operator) return calc.n2 = data
         }
         else if(isString(data)){
-            if(isOperator(EnterController)){
-                setToCalculator('operator', data)
-                nextEnterWillBe('n2')
-            }
-            else{nextEnterWillBe('n1')}
-        }
+            if(calc.n1) return calc.operator = data
+        } 
+        else{console.log('invalid data Type')}
+    } 
+
+    function getResultOf({n1, operator, n2}){
+        const result = `${n1} ${operator} ${n2} = ${calculate(calc)}`
+        console.log(result)
+        return result
     }
-    
-    function equals(){
-        if(EnterController === 'n2'){
-            history = [...history, {...calc, result: calculate(calc)}]
-            nextEnterWillBe('n1')
-            return (calculate(calc))
-        }
-        else{
-            nextEnterWillBe('n1')
-            alert('A ordem de entrada deve ser => Número 1 => Operador => Número 2')
-            calc = {n1: 0, operator: '', n2: 0}
-            return "Entrada realizada na ordem errada"
+
+
+    const equals = () => {
+        const {n1, operator, n2} = calc
+        if(n1 && operator && n2){
+            const result = getResultOf(calc)
+            addToHistory(result)
+            resetCalc()
+            return result
+        } else{
+            return 'Please type number 1, operator and number 2 before request the resolution'
         }
     }
 
-    const list = () => history.forEach(
-        ({n1, operator, n2, result}) => console.log(`${n1} ${operator} ${n2} = ${result}`)
-    )
-
-    const reset = () => history = []
-    
-    function calculate({n1, operator, n2}){
-        if(operator === '+') return n1 + n2
-        if(operator === '-') return n1 - n2
-        if(operator === '*') return n1 * n2
-        if(operator === '/') return n1 / n2
+    const calculate = ({n1, operator, n2}) => {
+        if(operator == '+') return n1 + n2
+        if(operator == '-') return n1 - n2
+        if(operator == '*') return n1 * n2
+        if(operator == '/') return n1 / n2
         if(operator === '^') return Math.pow(n1, n2)
         else return 'operator inválido'
     }
-    
-    return {
-        enter, equals, list, reset
-    }
 
+    return {enter, equals, list, reset, getCalc}
 })()
+
+// calculadora.enter(5)
+// calculadora.enter('+')
+// calculadora.enter(1)
+// calculadora.equals()
+
+// calculadora.enter(2)
+// calculadora.enter('-')
+// calculadora.enter(1)
+// calculadora.equals()
+
+// calculadora.enter(2)
+// calculadora.enter('^')
+// calculadora.enter(3)
+// calculadora.equals()
+
+// calculadora.enter(3)
+// calculadora.enter('^')
+// calculadora.enter(2)
+// calculadora.equals()
+
+// calculadora.enter(5)
+// calculadora.enter('*')
+// calculadora.enter(2)
+// calculadora.equals()
+
+// calculadora.enter(5)
+// calculadora.enter('/')
+// calculadora.enter(2)
+// calculadora.equals()
+
+// calculadora.list()
+
+// calculadora.reset()
+
+// calculadora.list()
