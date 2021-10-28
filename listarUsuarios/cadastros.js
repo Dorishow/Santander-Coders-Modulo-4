@@ -2,20 +2,24 @@ const inputNode = document.querySelector('input')
 const list = document.querySelector('#list')
 const form = document.querySelector('form')
 
-const remover = item => item.remove()
+const removeNode = node => node.remove()
 
-const clearForm = () => form.reset()
+const clearForm = (form) => form.reset()
 
-function addToList(e){
-    e.preventDefault()
-    const li = document.createElement('li')
+const addRemoveButtonToNode = node => {
     const button = document.createElement('button')
-    li.textContent = inputNode.value
-    button.textContent = 'remover'
-    button.addEventListener('click', () => remover(li))
-    li.append(button)
-    list.append(li)
-    clearForm()
+    button.textContent = 'remove'
+    button.addEventListener('click', () => removeNode(node))
+    node.append(button)
 }
 
-form.addEventListener('submit', e => addToList(e))
+function addToList(e, inputNode, list, form){
+    e.preventDefault()
+    const li = document.createElement('li')
+    li.textContent = inputNode.value
+    addRemoveButtonToNode(li)
+    list.append(li)
+    clearForm(form)
+}
+
+form.addEventListener('submit', e => addToList(e, inputNode, list, form))
