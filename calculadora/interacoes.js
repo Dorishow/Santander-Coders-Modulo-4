@@ -35,13 +35,15 @@ function clearHistory(){
 function entrar(e) {
     e.preventDefault()
     calculadora.enter(parseInt(input.value))
-    ShowInCalc(input.value)
+    const conta = calculadora.getCalc()
+    ShowInCalc(`${conta.n1} ${conta.operator || ''} ${conta.n2 || ''}`)
     clearInput()
 }
 
 function handleRadioButtons(event) {
     calculadora.enter(event.target.value)
-    ShowInCalc(event.target.value)
+    const conta = calculadora.getCalc()
+    ShowInCalc(`${conta.n1} ${conta.operator || ''} ${conta.n2 || ''}`)
 }
 
 function uncheckRadios() {

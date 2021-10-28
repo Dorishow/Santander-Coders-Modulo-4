@@ -10,6 +10,8 @@ const calculadora = (() => {
 
     const addToHistory = (data) => history = [...history, data]
 
+    const getCalc = () => calc
+
     function list() {
         if(history[0]) return history
         else{
@@ -22,15 +24,14 @@ const calculadora = (() => {
 
     const enter = data =>{
         if(isNumber(data)){
-            if(!calc.n1) return calc.n1 = data
-            if(!calc.n2) return calc.n2 = data
+            if(!calc.operator) return calc.n1 = data
+            if(calc.operator) return calc.n2 = data
         }
         else if(isString(data)){
-            if(!calc.operator) return calc.operator = data
+            if(calc.n1) return calc.operator = data
         } 
         else{console.log('invalid data Type')}
     } 
-
 
     function getResultOf({n1, operator, n2}){
         const result = `${n1} ${operator} ${n2} = ${calculate(calc)}`
@@ -60,7 +61,7 @@ const calculadora = (() => {
         else return 'operator inválido'
     }
 
-    return {enter, equals, list, reset}
+    return {enter, equals, list, reset, getCalc}
 })()
 
 // calculadora.enter(5)
