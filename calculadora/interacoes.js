@@ -43,7 +43,7 @@ function entrar(e) {
 function handleRadioButtons(event) {
     calculadora.enter(event.target.value)
     const conta = calculadora.getCalc()
-    ShowInCalc(`${conta.n1} ${conta.operator || ''} ${conta.n2 || ''}`)
+    ShowInCalc(`${conta.n1 || ''} ${conta.operator || ''} ${conta.n2 || ''}`)
 }
 
 function uncheckRadios() {
